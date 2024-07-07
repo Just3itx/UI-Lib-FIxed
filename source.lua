@@ -761,7 +761,7 @@ function lib:Window(text, preset, closebind)
                 end
             )()
 
-            local sliderDragging = false
+local sliderDragging = false
 
 -- Function to handle moving the slider
 local function move(input)
@@ -802,19 +802,24 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
 end)
 
 -- Touch input events
-SlideCircle.TouchStarted:Connect(function(input)
-    sliderDragging = true
+SlideCircle.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        sliderDragging = true
+    end
 end)
 
-SlideCircle.TouchEnded:Connect(function(input)
-    sliderDragging = false
+SlideCircle.InputEnded:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        sliderDragging = false
+    end
 end)
 
-game:GetService("UserInputService").TouchMoved:Connect(function(input)
+game:GetService("UserInputService").InputChanged:Connect(function(input)
     if sliderDragging and input.UserInputType == Enum.UserInputType.Touch then
         move(input)
     end
 end)
+
 
             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
         end
