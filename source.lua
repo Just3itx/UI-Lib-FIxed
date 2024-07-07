@@ -761,7 +761,7 @@ function lib:Window(text, preset, closebind)
                 end
             )()
 
-local sliderDragging = false
+            local sliderDragging = false
 
 -- Function to handle moving the slider
 local function move(input)
@@ -787,11 +787,11 @@ local function move(input)
 end
 
 -- Mouse input events
-SlideCircle.MouseButton1Down:Connect(function(input)
+SlideCircle.MouseButton1Down:Connect(function()
     sliderDragging = true
 end)
 
-SlideCircle.MouseButton1Up:Connect(function(input)
+SlideCircle.MouseButton1Up:Connect(function()
     sliderDragging = false
 end)
 
@@ -819,7 +819,6 @@ game:GetService("UserInputService").InputChanged:Connect(function(input)
         move(input)
     end
 end)
-
 
             Tab.CanvasSize = UDim2.new(0, 0, 0, TabLayout.AbsoluteContentSize.Y)
         end
